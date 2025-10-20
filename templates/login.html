@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block titulo %}Hominis - Login {% endblock %}
+
+
+{% block conteudo %}
+
+<div class="caixa_login">
+    <p class="titulos">Login</p>
+    
+    <form method="POST" action="/" style="width: 80%;">
+    <hr>
+    <input type="text" placeholder="E-mail Usuário" class="input_login"><br>
+    <input type="password" placeholder="Senha" class="input_login"><br>
+    <hr><br>
+    <button class="botao_login" type="submit">Entrar</button>
+    </form>
+</div>
+
+{% endblock %}
