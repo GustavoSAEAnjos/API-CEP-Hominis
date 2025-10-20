@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block conteudo %}
+    <h2>Editar curso</h2>
+    {% for category, mensagem in get_flashed_messages(with_categories=true) %}
+        <div class="alert alert-{{ category }}">
+            {{ mensagem }}
+        </div>
+    {% endfor %}
+    <form action="{{ url_for('editar', id_curso=curso.id_curso) }}" method="POST">
+        <div class="form-row">
+            <label for="nome_curso">Nome curso:</label>
+            <input type="text" name="nome_curso" value="{{ curso.nome_curso }}" required />
+        </div>
+        <div class="form-row">
+            <label for="descricao">Descrição:</label>
+            <input type="text" name="descricao" value="{{ curso.descricao }}" required />
+        </div>
+        <div class="form-row">
+            <label for="carga_horaria">Carga horária:</label>
+            <input type="number" name="carga_horaria" value="{{ curso.carga_horaria }}" required />
+        </div>
+        <div class="form-actions">
+            <button type="submit" class="btn success">
+                <i class="fas fa-edit"></i> Editar
+            </button>
+        </div>
+    </form>
+{% endblock conteudo %}
