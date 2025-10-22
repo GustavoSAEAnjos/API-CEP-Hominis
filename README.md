@@ -19,8 +19,6 @@
 **Hominis** é um sistema web desenvolvido com **Flask (Python)** que implementa um **CRUD completo** para gerenciamento de pessoas.  
 Além das operações básicas — **criar, visualizar, editar e deletar registros** — o projeto se destaca pela integração com uma **API de CEP**, que preenche automaticamente os campos de endereço, tornando o processo de cadastro rápido e inteligente.
 
-Este projeto foi criado com foco em **aprendizado, boas práticas de desenvolvimento web** e uma **estrutura clara e escalável**, ideal para servir como peça de portfólio.
-
 ---
 
 ## Tecnologias Utilizadas
@@ -31,7 +29,6 @@ Este projeto foi criado com foco em **aprendizado, boas práticas de desenvolvim
 | **Banco de Dados** | SQLite3 |
 | **Frontend** | HTML5, CSS3, JavaScript |
 | **API Externa** | ViaCEP |
-| **Outros** | Jinja2, Fetch API |
 
 ---
 
@@ -51,7 +48,7 @@ O projeto segue uma arquitetura simples e organizada:
 - **`app.py`** contém as rotas, inicialização do servidor e integração com o banco de dados.  
 - **`templates/`** armazena os arquivos HTML renderizados via Jinja2.  
 - **`static/`** guarda os recursos estáticos (CSS e JavaScript).  
-- **`database.db`** é o banco de dados SQLite, criado automaticamente.
+- **`instance/hominis..sqlite3.db`** é o banco de dados SQLite, criado automaticamente.
 
 ---
 
@@ -61,15 +58,6 @@ O **Hominis** consome a API pública **ViaCEP**, permitindo preencher automatica
 
 https://viacep.com.br/ws/{cep}/json/
 
----
-
-## Objetivo
-
-O **Hominis** foi desenvolvido com o propósito de:
-- Consolidar o aprendizado de **Flask** e **integração frontend-backend**;  
-- Explorar **boas práticas de CRUDs** e manipulação de banco de dados;  
-- Criar uma base sólida para projetos mais complexos no futuro;  
-- Servir como **projeto de portfólio** para demonstrar domínio de tecnologias web.
 ---
 
 ## Autor

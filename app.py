@@ -72,6 +72,10 @@ def principal():
 def listar():
     return render_template("listar.html")
 
+@app.route("/teste")
+def teste():
+    return render_template("teste.html")
+
 
 @app.route("/cadastrar", methods=["GET", "POST"])
 def cadastrar():
