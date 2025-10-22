@@ -1,7 +1,9 @@
 {% extends "base.html" %}
 
 {% block titulo %}Hominis - Login {% endblock %}
-
+{% block header %}
+<h1>Hominis</h1>
+{% endblock %}
 
 {% block conteudo %}
 
@@ -13,7 +15,9 @@
     <input type="text" placeholder="E-mail Usuário" class="input_login"><br>
     <input type="password" placeholder="Senha" class="input_login"><br>
     <hr><br>
-    <button class="botao_login" type="submit">Entrar</button>
+    <center>
+        <button class="botao_login" type="submit">Entrar</button>
+    </center>
     </form>
 </div>
 

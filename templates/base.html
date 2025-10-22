@@ -6,12 +6,16 @@
     <title> {% block titulo %}{% endblock %} </title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;700&display=swap" rel="stylesheet">
-
 </head>
 <body>
     <nav>
             <div class="logo">a</div>
-            <div class="resto">a</div>
+            <div class="meio">
+                {% block header %}
+                
+                {% endblock %}
+            </div>
+            <div class="login">a</div>
     </nav>
     <div class="conteudo">
         {% block conteudo %}
@@ -20,3 +24,20 @@
     </div>
 </body>
 </html>
+
+<!-- 
+
+Estilização do menu dorpdown da pagina de edição e visualização
+
+<ul class="menu">
+        <li>
+          <a>Funcionarios ▼</a>
+          <ul class="dropdown">
+            <li><a href="#" class="dropdown-item">Funcionario Gustavo</a></li>
+            <li><a href="#">Funcionario Heloize</a></li>
+            <li><a href="#">Funcionario Iokoloka</a></li>
+          </ul>
+        </li>
+      </ul>
+
+-->

@@ -29,11 +29,12 @@ class hominis(db.Model):
     cidade = db.Column(db.Text, nullable=False)
     estado = db.Column(db.Text, nullable=False)
     pais = db.Column(db.Text, nullable=False)
+    senha = db.Column(db.Text, nullable=False)
 
     def __init__(self, nome, cpf, data_nasc_fund, genero, estado_civil, nacionalidade,
                  ocupaçao, telefone_principal, telefone_secundario, email_prncipal,
                  email_secundario, cep, logradouro, numero_casa, complemento,
-                 bairro, cidade, estado, pais):
+                 bairro, cidade, estado, pais, senha):
         self.nome = nome
         self.cpf = cpf
         self.data_nasc_fund = data_nasc_fund
@@ -53,6 +54,7 @@ class hominis(db.Model):
         self.cidade = cidade
         self.estado = estado
         self.pais = pais
+        self.senha = senha
 
 @app.route("/", methods=["GET", "POST"])
 def login():
@@ -111,7 +113,8 @@ if __name__ == "__main__":
                 bairro="Nenhum",
                 cidade="Nenhum",
                 estado="Nenhum",
-                pais="Nenhum"
+                pais="Nenhum",
+                senha="admin123"
             )
             db.session.add(admin)
             db.session.commit()
