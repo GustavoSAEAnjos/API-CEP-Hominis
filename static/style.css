@@ -9,7 +9,6 @@ body {
     align-items: center;
     align-content: center;
     justify-content: center;
-    height: 80vh;
     padding-top: 30px;
     padding-bottom: 30px;
 }
@@ -232,7 +231,23 @@ nav {
     height: 3rem;
     display: flex;
     align-items: center;
-    justify-content: center;
+    border-bottom-left-radius: 20px ;
+    border-bottom-right-radius: 20px ;
+}
+
+.botao-footer-caixa{
+    background-color: white;
+    padding: 10px;
+    border-radius: 20px;
+    border: 0;
+    font-size: 15px;
+}
+
+.header-caixa-escolha-func{
+    background-color: white;
+    height: 20%;
+    border-top-left-radius: 20px ;
+    border-top-right-radius: 20px ;
 }
 
 .menu {
@@ -241,6 +256,8 @@ nav {
     margin: 0;
     background: #CBDDE4;
     display: flex;
+    width: fit-content;
+    border-top-left-radius: 20px ;
   }
 
   .menu li {

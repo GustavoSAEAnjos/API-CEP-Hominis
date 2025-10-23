@@ -130,18 +130,18 @@
   </div>
   
 
-  <script>
-    function mostrarAba(idAba) {
-      // Esconde todas as abas
-      const abas = document.querySelectorAll('.aba');
-      abas.forEach(aba => aba.classList.remove('ativa'));
-
-      // Mostra apenas a aba clicada
-      document.getElementById(idAba).classList.add('ativa');
-    }
-  </script>
+  
 
 </div>
-<div class="footer-caixa"></div>
+<div class="footer-caixa">
+    <div style="width: 50%; padding-left: 10px; display: flex; align-items: center;">
+        <button class="botao-footer-caixa">Voltar</button>
+    </div>
+    
+    <div style="width: 50%; display: flex; align-items: center; justify-content: end; padding-right: 10px;">
+        <button class="botao-footer-caixa" id="btnSalvar">Salvar</button>
+    </div>
+    
+</div>
 </div>
 {% endblock %}

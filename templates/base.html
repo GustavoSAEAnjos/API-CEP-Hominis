@@ -22,5 +22,15 @@
 
         {% endblock %}
     </div>
+    <script>
+    function mostrarAba(idAba) {
+      // Esconde todas as abas
+      const abas = document.querySelectorAll('.aba');
+      abas.forEach(aba => aba.classList.remove('ativa'));
+
+      // Mostra apenas a aba clicada
+      document.getElementById(idAba).classList.add('ativa');
+    }
+  </script>
 </body>
 </html>
