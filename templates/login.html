@@ -12,13 +12,24 @@
     
     <form method="POST" action="/" style="width: 80%;">
     <hr>
-    <input type="text" placeholder="E-mail Usuário" class="input_login"><br>
-    <input type="password" placeholder="Senha" class="input_login"><br>
+    <input type="text" placeholder="E-mail Usuário" name="email" class="input_login" required><br>
+    <input type="password" placeholder="Senha" name="senha" class="input_login" required><br>
     <hr><br>
     <center>
         <button class="botao_login" type="submit">Entrar</button>
     </center>
     </form>
+    <center>
+        {% with mensagens = get_flashed_messages(with_categories=True) %}
+            {% if mensagens %}
+                {% for categoria, msg in mensagens %}
+                <div class="flash {{ categoria }}">
+                    {{ msg }}
+                </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+    </center>
 </div>
 
 {% endblock %}

@@ -148,6 +148,11 @@ nav {
     font-size: 90%;
     border: 1px solid gray;
     border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    font-style: normal;
+    text-decoration: none;
+    color: black;
 }
 
 .botao-header{
@@ -157,6 +162,20 @@ nav {
     width: 20%;
     border-radius: 20px;
     font-size: 160%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-style: normal;
+    text-decoration: none;
+    color: black;
+}
+
+.btn:hover{
+    cursor: pointer;
+}
+
+.error{
+    color: red;
 }
 
 .caixa-add{
@@ -241,6 +260,9 @@ nav {
     border-radius: 20px;
     border: 0;
     font-size: 15px;
+    font-style: normal;
+    text-decoration: none;
+    color: black;
 }
 
 .header-caixa-escolha-func{

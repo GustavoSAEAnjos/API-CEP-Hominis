@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, flash
+from flask import Flask, render_template, request, redirect, url_for, flash, session
 from flask_sqlalchemy import SQLAlchemy
 
 
@@ -58,38 +58,96 @@ class hominis(db.Model):
 
 @app.route("/", methods=["GET", "POST"])
 def login():
+    if 'usuario_id' in session:
+        return redirect(url_for('principal'))
+    
     if request.method == "POST":
-        return redirect(url_for("principal"))
+        email = request.form["email"]
+        senha = request.form["senha"]
+        if not email or not email:
+            flash("Por favor, preencha todos os campos.", "error")
+        else:
+            usuario = hominis.query.filter_by(email_prncipal=email, senha=senha).first()
+            if usuario:
+                session['usuario_id'] = usuario.id
+                session['usuario_nome'] = usuario.nome
+                return redirect(url_for("principal"))
+            
+        flash("Email ou Senha inválidos", "error")
 
+        return render_template("login.html")
+    
     return render_template("login.html")
 
 @app.route("/index")
 def principal():
-    return render_template("index.html")
+    if 'usuario_id' not in session:
+        return redirect(url_for('login'))
+    
+    funcionarios = hominis.query.all()
+    return render_template("index.html", funcionarios=funcionarios)
 
 
 @app.route("/listar")
 def listar():
+    if 'usuario_id' not in session:
+        return redirect(url_for('login'))
+    
     return render_template("listar.html")
-
-@app.route("/teste")
-def teste():
-    return render_template("teste.html")
-
 
 @app.route("/cadastrar", methods=["GET", "POST"])
 def cadastrar():
+    if 'usuario_id' not in session:
+        return redirect(url_for('login'))
+    
     return render_template("cadastrar.html")
 
 
 @app.route("/excluir", methods=["GET", "POST"])
 def excluir():
+    if 'usuario_id' not in session:
+        return redirect(url_for('login'))
+    
     return redirect(url_for("listar"))
 
 
-@app.route("/editar", methods=["GET", "POST"])
-def editar():
-    return render_template("editar.html")
+@app.route("/editar/<int:id>", methods=["GET", "POST"])
+def editar(id):
+    if 'usuario_id' not in session:
+        return redirect(url_for('login'))
+    
+    funcionario = hominis.query.get_or_404(id)
+    funcionarios = hominis.query.all()
+    if request.method == "POST":
+        if not request.form["nome"] or not request.form["cpf"] or not request.form["data_nasc_fund"] or not request.form["ocupaçao"] or not request.form["telefone_principal"] or not request.form["email_prncipal"] or not request.form["cep"] or not request.form["logradouro"] or not request.form["numero_casa"] or not request.form["bairro"] or not request.form["cidade"] or not request.form["estado"] or not request.form["pais"] or not request.form["senha"]:
+            flash("Por favor, preencha todos os campos obrigatórios.", "error")
+        else:
+            funcionario.nome = request.form["nome"]
+            funcionario.cpf = request.form["cpf"]
+            funcionario.data_nasc_fund = request.form["data_nasc_fund"]
+            funcionario.genero = request.form["genero"]
+            funcionario.estado_civil = request.form["estado_civil"]
+            funcionario.nacionalidade = request.form["nacionalidade"]
+            funcionario.ocupaçao = request.form["ocupaçao"]
+            funcionario.telefone_principal = request.form["telefone_principal"]
+            funcionario.telefone_secundario = request.form["telefone_secundario"]
+            funcionario.email_prncipal = request.form["email_prncipal"]
+            funcionario.email_secundario = request.form["email_secundario"]
+            funcionario.cep = request.form["cep"]
+            funcionario.logradouro = request.form["logradouro"]
+            funcionario.numero_casa = request.form["numero_casa"]
+            funcionario.complemento = request.form["complemento"]
+            funcionario.bairro = request.form["bairro"]
+            funcionario.cidade = request.form["cidade"]
+            funcionario.estado = request.form["estado"]
+            funcionario.pais = request.form["pais"]
+            funcionario.senha = request.form["senha"]
+            db.session.commit()
+            flash("Dados atualizados com sucesso!", "success")
+            return redirect("editar.html", id=id, funcionario=funcionario, funcionarios=funcionarios)
+        
+
+    return render_template("editar.html", id=id, funcionario=funcionario, funcionarios=funcionarios)
 
 
 if __name__ == "__main__":
@@ -108,7 +166,7 @@ if __name__ == "__main__":
                 ocupaçao="Administrador",
                 telefone_principal="(00) 00000-0000",
                 telefone_secundario=None,
-                email_prncipal="Nenhum",
+                email_prncipal="adm@gmail.com",
                 email_secundario=None,
                 cep="00000-000",
                 logradouro="Nenhum",

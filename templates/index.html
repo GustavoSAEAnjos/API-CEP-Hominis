@@ -2,23 +2,22 @@
 
 {% block titulo %}Hominis - Inicial {% endblock %}
 {% block header %}
-<button class="botao-header">Inicio</button>
-<button class="botao-header">Adicionar</button>
+<a class="botao-header btn">Adicionar</a>
 {% endblock %}
 
 {% block conteudo %}
 
 <div class="caixa-tabela">
-    
-    <div class="container-conteudo">
-        <div class="tabela-nome-func">Gustavo Soares Araujo Evangelista dos Anjos</div>
-        <div class="tabela-cpf-func">153-486</div>
-        <div class="tabela-botoes">
-            <button class="botoes-tabela">Informações</button> 
-            <button class="botoes-tabela">Editar</button>
+    {% for funcionario in funcionarios %}
+        <div class="container-conteudo">
+            <div class="tabela-nome-func">{{ funcionario.nome }}</div>
+            <div class="tabela-cpf-func">{{ funcionario.cpf }}</div>
+            <div class="tabela-botoes">
+                <a class="botoes-tabela btn">Informações</a>
+                <a href="{{ url_for('editar', id=funcionario.id) }}" class="botoes-tabela btn">Editar</a>
+            </div>
         </div>
-    </div>
-
+    {% endfor %}
 </div>
 
 {% endblock %}
