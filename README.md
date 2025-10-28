@@ -9,7 +9,7 @@
   <img src="https://img.shields.io/badge/Flask-Framework-black.svg" alt="Flask">
   <img src="https://img.shields.io/badge/Database-SQLite3-lightgrey.svg" alt="SQLite3">
   <img src="https://img.shields.io/badge/Frontend-HTML%20%7C%20CSS%20%7C%20JS-yellow.svg" alt="Frontend">
-  <img src="https://img.shields.io/badge/Status-Em%20Desenvolvimento-orange.svg" alt="Status">
+  <img src="https://img.shields.io/badge/Status-Finalizado-brightgreen.svg" alt="Status">
 </p>
 
 ---
@@ -57,6 +57,14 @@ O projeto segue uma arquitetura simples e organizada:
 O **Hominis** consome a API pública **ViaCEP**, permitindo preencher automaticamente os campos de endereço a partir do CEP informado:
 
 https://viacep.com.br/ws/{cep}/json/
+
+---
+
+## Como Pegar as Dependencias
+
+Entre no CMD e digite a linha de comando:
+**pip install -r requirements.txt**
+Isso irá pegar todas as dependencias que o projeto necessita
 
 ---
 
