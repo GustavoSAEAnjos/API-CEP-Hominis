@@ -152,6 +152,11 @@ def editar(id):
     if 'usuario_id' not in session:
         return redirect(url_for('login'))
     
+    if id == 1:
+        flash("O administrador não pode ser editado.", "error")
+        return redirect(url_for("principal"))
+    
+
     funcionario = hominis.query.get_or_404(id)
     funcionarios = hominis.query.all()
     if request.method == "POST":
@@ -184,6 +189,11 @@ def editar(id):
 
     return render_template("editar.html", id=id, funcionario=funcionario, funcionarios=funcionarios)
 
+@app.route("/sair")
+def sair():
+    session.pop('usuario_id', None)
+    session.pop('usuario_nome', None)
+    return redirect(url_for('login'))
 
 if __name__ == "__main__":
     # Cria as tabelas no banco caso ainda não existam

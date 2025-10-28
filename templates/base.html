@@ -1,36 +1,60 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> {% block titulo %}{% endblock %} </title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;700&display=swap" rel="stylesheet">
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block titulo %}{% endblock %}</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="shortcut icon"
+      href="{{ url_for('static', filename='imagens/hominis_badge.ico') }}"
+      type="image/x-icon"
+    />
+  </head>
+  <body>
     <nav>
-            <div class="logo">a</div>
-            <div class="meio">
-                {% block header %}
-                
-                {% endblock %}
-            </div>
-            <div class="login"><i class="fi fi-sr-user"></i></div>
+      <div class="logo"></div>
+      <div class="meio">{% block header %} {% endblock %}</div>
+
+      <div class="login-container">
+        <button class="login" onclick="toggleCaixa()"></button>
+        <div class="caixa-opcoes" id="caixaOpcoes">
+          {{ session['usuario_nome'] }}
+          <a href="{{ url_for('sair') }}">Sair</a>
+        </div>
+      </div>
     </nav>
-    <div class="conteudo">
-        {% block conteudo %}
-
-        {% endblock %}
-    </div>
+    <div class="conteudo">{% block conteudo %} {% endblock %}</div>
     <script>
-    function mostrarAba(idAba) {
-      // Esconde todas as abas
-      const abas = document.querySelectorAll('.aba');
-      abas.forEach(aba => aba.classList.remove('ativa'));
+      function mostrarAba(idAba) {
+        // Esconde todas as abas
+        const abas = document.querySelectorAll(".aba");
+        abas.forEach((aba) => aba.classList.remove("ativa"));
 
-      // Mostra apenas a aba clicada
-      document.getElementById(idAba).classList.add('ativa');
-    }
-  </script>
-</body>
+        // Mostra apenas a aba clicada
+        document.getElementById(idAba).classList.add("ativa");
+      }
+
+      function toggleCaixa() {
+        const caixa = document.getElementById("caixaOpcoes");
+        caixa.classList.toggle("ativa");
+      }
+
+      // Fecha a caixa ao clicar fora
+      window.addEventListener("click", function (e) {
+        const caixa = document.getElementById("caixaOpcoes");
+        const botao = document.querySelector(".login");
+        if (!botao.contains(e.target) && !caixa.contains(e.target)) {
+          caixa.classList.remove("ativa");
+        }
+      });
+    </script>
+  </body>
 </html>

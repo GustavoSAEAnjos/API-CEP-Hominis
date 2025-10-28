@@ -19,12 +19,15 @@ nav {
     align-content: center;
     justify-content: center;
     height: 7vh;
+    background-color: #CBDDE4;
 }
 
 .logo{
     height: 100%;
-    background-color: black;
-    color: white;
+    background-image: url('../imagens/honis_logo.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
     width: 5%;
     display: flex;
     align-items: center;
@@ -43,15 +46,63 @@ nav {
     gap: 20%;
 }
 
+.login-container {
+    position: relative;
+    height: 100%;
+    width: 5%;
+    display: flex;
+    align-items: center;
+}
+
 .login{
     height: 100%;
-    background-color: black;
-    color: white;
-    width: 5%;
+    background-image: url(../imagens/sair.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: #CBDDE4;
+    border-radius: 10px;
+    width: 100%;
     display: flex;
     align-items: center;
     align-content: center;
     justify-content: center;
+    border: 0;
+}
+
+.login:hover{
+    cursor: pointer;
+}
+
+.caixa-opcoes {
+    display: none;
+    position: absolute;
+    top: 100%;       /* logo abaixo do botão */
+    right: 0;        /* alinhada à direita */
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    width: 180px;
+    padding: 10px;
+    z-index: 100;
+}
+
+.caixa-opcoes.ativa {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.caixa-opcoes a {
+    text-decoration: none;
+    color: #333;
+    padding: 6px 8px;
+    border-radius: 5px;
+}
+
+.caixa-opcoes a:hover {
+    background-color: #CBDDE4;
 }
 
 .caixa_login{
@@ -320,3 +371,4 @@ nav {
   .menu li:hover > .dropdown {
     display: block;
   }
+

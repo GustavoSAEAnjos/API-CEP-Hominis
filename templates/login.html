@@ -1,35 +1,39 @@
-{% extends "base.html" %}
-
-{% block titulo %}Hominis - Login {% endblock %}
-{% block header %}
+{% extends "base.html" %} {% block titulo %}Hominis - Login {% endblock %} {%
+block header %}
 <h1>Hominis</h1>
-{% endblock %}
-
-{% block conteudo %}
+{% endblock %} {% block conteudo %}
 
 <div class="caixa_login">
-    <p class="titulos">Login</p>
-    
-    <form method="POST" action="/" style="width: 80%;">
-    <hr>
-    <input type="text" placeholder="E-mail Usuário" name="email" class="input_login" required><br>
-    <input type="password" placeholder="Senha" name="senha" class="input_login" required><br>
-    <hr><br>
+  <p class="titulos">Login</p>
+
+  <form method="POST" action="/" style="width: 80%">
+    <hr />
+    <input
+      type="text"
+      placeholder="E-mail Usuário"
+      name="email"
+      class="input_login"
+      required
+    /><br />
+    <input
+      type="password"
+      placeholder="Senha"
+      name="senha"
+      class="input_login"
+      required
+    /><br />
+    <hr />
+    <br />
     <center>
-        <button class="botao_login" type="submit">Entrar</button>
+      <button class="botao_login" type="submit">Entrar</button>
     </center>
-    </form>
-    <center>
-        {% with mensagens = get_flashed_messages(with_categories=True) %}
-            {% if mensagens %}
-                {% for categoria, msg in mensagens %}
-                <div class="flash {{ categoria }}">
-                    {{ msg }}
-                </div>
-                {% endfor %}
-            {% endif %}
-        {% endwith %}
-    </center>
+  </form>
+  <center>
+    {% with mensagens = get_flashed_messages(with_categories=True) %} {% if
+    mensagens %} {% for categoria, msg in mensagens %}
+    <div class="flash {{ categoria }}">{{ msg }}</div>
+    {% endfor %} {% endif %} {% endwith %}
+  </center>
 </div>
 
 {% endblock %}

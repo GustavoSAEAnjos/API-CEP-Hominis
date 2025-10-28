@@ -12,10 +12,14 @@
         <div class="container-conteudo">
             <div class="tabela-nome-func">{{ funcionario.nome }}</div>
             <div class="tabela-cpf-func">{{ funcionario.cpf }}</div>
+            {% if funcionario.id != 1 %}
             <div class="tabela-botoes">
                 <a href="{{ url_for('ver', id=funcionario.id) }}" class="botoes-tabela btn">Informações</a>
                 <a href="{{ url_for('editar', id=funcionario.id) }}" class="botoes-tabela btn">Editar</a>
             </div>
+            {% else %}
+            <div class="tabela-botoes"></div>
+            {% endif %}
         </div>
     {% endfor %}
 </div>
