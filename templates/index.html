@@ -2,7 +2,7 @@
 
 {% block titulo %}Hominis - Inicial {% endblock %}
 {% block header %}
-<a class="botao-header btn">Adicionar</a>
+<a href="{{ url_for('cadastrar') }}" class="botao-header btn">Adicionar</a>
 {% endblock %}
 
 {% block conteudo %}
@@ -13,7 +13,7 @@
             <div class="tabela-nome-func">{{ funcionario.nome }}</div>
             <div class="tabela-cpf-func">{{ funcionario.cpf }}</div>
             <div class="tabela-botoes">
-                <a class="botoes-tabela btn">Informações</a>
+                <a href="{{ url_for('ver', id=funcionario.id) }}" class="botoes-tabela btn">Informações</a>
                 <a href="{{ url_for('editar', id=funcionario.id) }}" class="botoes-tabela btn">Editar</a>
             </div>
         </div>

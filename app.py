@@ -87,29 +87,65 @@ def principal():
     funcionarios = hominis.query.all()
     return render_template("index.html", funcionarios=funcionarios)
 
-
-@app.route("/listar")
-def listar():
-    if 'usuario_id' not in session:
-        return redirect(url_for('login'))
-    
-    return render_template("listar.html")
-
 @app.route("/cadastrar", methods=["GET", "POST"])
 def cadastrar():
     if 'usuario_id' not in session:
         return redirect(url_for('login'))
     
+    if request.method == "POST":
+        if not request.form["nome"] or not request.form["cpf"] or not request.form["data_nasc_fund"] or not request.form["ocupacao"] or not request.form["telefone_principal"] or not request.form["emai_secundario"] or not request.form["cep"] or not request.form["log"] or not request.form["numero"] or not request.form["bairro"] or not request.form["cidade"] or not request.form["estado"] or not request.form["pais"] or not request.form["senha"]:
+            flash("Por favor, preencha todos os campos obrigatórios.", "error")
+        else:
+            funcionario = hominis(
+                nome=request.form["nome"],
+                cpf=request.form["cpf"],
+                data_nasc_fund=request.form["data_nasc_fund"],
+                genero=request.form["genero"],
+                estado_civil=request.form["estado-civil"],
+                nacionalidade=request.form["nacionalidade"],
+                ocupaçao=request.form["ocupacao"],
+                telefone_principal=request.form["telefone_principal"],
+                telefone_secundario=request.form["telefone_secundario"],
+                email_prncipal=request.form["email_principal"],
+                email_secundario=request.form["emai_secundario"],
+                cep=request.form["cep"],
+                logradouro=request.form["log"],
+                numero_casa=request.form["numero"],
+                complemento=request.form["complemento"],
+                bairro=request.form["bairro"],
+                cidade=request.form["cidade"],
+                estado=request.form["estado"],
+                pais=request.form["pais"],
+                senha=request.form["senha"]
+            )
+            db.session.add(funcionario)
+            return redirect(url_for("principal"))
+        
     return render_template("cadastrar.html")
 
 
-@app.route("/excluir", methods=["GET", "POST"])
-def excluir():
+@app.route("/excluir/<int:id>", methods=["POST"])
+def excluir(id):
+    if 'usuario_id' not in session:
+        return redirect(url_for('login'))
+
+    funcionario = hominis.query.get_or_404(id)  
+    db.session.delete(funcionario)              
+    db.session.commit()                         
+
+    flash("Funcionário excluído com sucesso!", "success")
+    return redirect(url_for("principal"))
+
+
+@app.route("/ver/<int:id>")
+def ver(id):
     if 'usuario_id' not in session:
         return redirect(url_for('login'))
     
-    return redirect(url_for("listar"))
+    funcionario = hominis.query.get_or_404(id)
+    funcionarios = hominis.query.all()
 
+    return render_template("ver.html", funcionario=funcionario, funcionarios=funcionarios)
 
 @app.route("/editar/<int:id>", methods=["GET", "POST"])
 def editar(id):
@@ -119,32 +155,31 @@ def editar(id):
     funcionario = hominis.query.get_or_404(id)
     funcionarios = hominis.query.all()
     if request.method == "POST":
-        if not request.form["nome"] or not request.form["cpf"] or not request.form["data_nasc_fund"] or not request.form["ocupaçao"] or not request.form["telefone_principal"] or not request.form["email_prncipal"] or not request.form["cep"] or not request.form["logradouro"] or not request.form["numero_casa"] or not request.form["bairro"] or not request.form["cidade"] or not request.form["estado"] or not request.form["pais"] or not request.form["senha"]:
+        if not request.form["nome"] or not request.form["cpf"] or not request.form["data_nasc_fund"] or not request.form["ocupacao"] or not request.form["telefone_principal"] or not request.form["emai_secundario"] or not request.form["cep"] or not request.form["log"] or not request.form["numero"] or not request.form["bairro"] or not request.form["cidade"] or not request.form["estado"] or not request.form["pais"] or not request.form["senha"]:
             flash("Por favor, preencha todos os campos obrigatórios.", "error")
         else:
-            funcionario.nome = request.form["nome"]
-            funcionario.cpf = request.form["cpf"]
-            funcionario.data_nasc_fund = request.form["data_nasc_fund"]
-            funcionario.genero = request.form["genero"]
-            funcionario.estado_civil = request.form["estado_civil"]
-            funcionario.nacionalidade = request.form["nacionalidade"]
-            funcionario.ocupaçao = request.form["ocupaçao"]
-            funcionario.telefone_principal = request.form["telefone_principal"]
-            funcionario.telefone_secundario = request.form["telefone_secundario"]
-            funcionario.email_prncipal = request.form["email_prncipal"]
-            funcionario.email_secundario = request.form["email_secundario"]
-            funcionario.cep = request.form["cep"]
-            funcionario.logradouro = request.form["logradouro"]
-            funcionario.numero_casa = request.form["numero_casa"]
-            funcionario.complemento = request.form["complemento"]
-            funcionario.bairro = request.form["bairro"]
-            funcionario.cidade = request.form["cidade"]
-            funcionario.estado = request.form["estado"]
-            funcionario.pais = request.form["pais"]
-            funcionario.senha = request.form["senha"]
+            funcionario.nome=request.form["nome"]
+            funcionario.cpf=request.form["cpf"]
+            funcionario.data_nasc_fund=request.form["data_nasc_fund"]
+            funcionario.genero=request.form["genero"]
+            funcionario.estado_civil=request.form["estado-civil"]
+            funcionario.nacionalidade=request.form["nacionalidade"]
+            funcionario.ocupaçao=request.form["ocupacao"]
+            funcionario.telefone_principal=request.form["telefone_principal"]
+            funcionario.telefone_secundario=request.form["telefone_secundario"]
+            funcionario.email_prncipal=request.form["email_principal"]
+            funcionario.email_secundario=request.form["emai_secundario"]
+            funcionario.cep=request.form["cep"]
+            funcionario.logradouro=request.form["log"]
+            funcionario.numero_casa=request.form["numero"]
+            funcionario.complemento=request.form["complemento"]
+            funcionario.bairro=request.form["bairro"]
+            funcionario.cidade=request.form["cidade"]
+            funcionario.estado=request.form["estado"]
+            funcionario.pais=request.form["pais"]
+            funcionario.senha=request.form["senha"]
             db.session.commit()
-            flash("Dados atualizados com sucesso!", "success")
-            return redirect("editar.html", id=id, funcionario=funcionario, funcionarios=funcionarios)
+            return redirect(url_for("principal"))
         
 
     return render_template("editar.html", id=id, funcionario=funcionario, funcionarios=funcionarios)
