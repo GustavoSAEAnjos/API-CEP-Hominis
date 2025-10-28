@@ -46,6 +46,10 @@ nav {
     gap: 20%;
 }
 
+.espaco{
+    width: 5%;
+}
+
 .login-container {
     position: relative;
     height: 100%;

@@ -22,7 +22,11 @@
     <nav>
       <div class="logo"></div>
       <div class="meio">{% block header %} {% endblock %}</div>
-
+      {% if session['usuario_nome%'] is not defined %}
+      <div class="espaco"></div>
+      {% else %}
+      <a href="{{ url_for('login') }}" class="botao-header btn">Login</a>
+      
       <div class="login-container">
         <button class="login" onclick="toggleCaixa()"></button>
         <div class="caixa-opcoes" id="caixaOpcoes">
@@ -30,6 +34,7 @@
           <a href="{{ url_for('sair') }}">Sair</a>
         </div>
       </div>
+      {% endif %}
     </nav>
     <div class="conteudo">{% block conteudo %} {% endblock %}</div>
     <script>
